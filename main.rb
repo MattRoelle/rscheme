@@ -2,7 +2,7 @@ require 'babel_bridge'
 
 $built_in_procs = {
   
-  "+" => proc { |args|
+  '+' => proc { |args|
     result = 0
     args.each do  |arg|
       result += arg.to_s.to_f
@@ -10,7 +10,7 @@ $built_in_procs = {
     result
   },
   
-  "-" => proc { |args|
+  '-' => proc { |args|
     result = args.first.to_s.to_f
     args[1..args.length].each do |arg|
       result -= arg.to_s.to_f
@@ -18,7 +18,7 @@ $built_in_procs = {
     result
   },
   
-  "*" => proc { |args|
+  '*' => proc { |args|
     result = args.first.to_s.to_f
     args[1..args.length].each do |arg|
       result *= arg.to_s.to_f
@@ -26,7 +26,7 @@ $built_in_procs = {
     result
   },
   
-  "/" => proc { |args|
+  '/' => proc { |args|
     result = args.first.to_s.to_f
     args[1..args.length].each do |arg|
       result /= arg.to_s.to_f
@@ -34,7 +34,7 @@ $built_in_procs = {
     result
   },
   
-  "print" => proc { |args|
+  'print' => proc { |args|
     print args.first.to_s
   }
 
@@ -62,7 +62,7 @@ class Parser < BabelBridge::Parser
     end
   end
 
-  rule :expression, "(", many(:expression, " "), ")" do
+  rule :expression, '(', many(:expression, ' '), ')' do
     def evaluate
       proc_name = expression[0].to_s
       proc_args = expression[1..expression.length]
@@ -74,7 +74,7 @@ class Parser < BabelBridge::Parser
       end
   end
 
-  rule :expression, "(", many(:identifier, " "), ")" do
+  rule :expression, '(', many(:identifier, ' '), ')' do
     def evaluate
       proc_name = identifier[0].to_s
       proc_args = identifier[1..expression.length]
